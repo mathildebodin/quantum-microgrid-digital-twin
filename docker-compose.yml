@@ -1,0 +1,11 @@
+services:
+
+  database:
+    image: postgres:16
+    container_name: microgrid-db
+    environment:
+      POSTGRES_DB: microgrid
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    ports:
+      - "5432:5432"
