@@ -1,28 +1,42 @@
 package com.quantummicrogrid.controller;
 
 
+import com.quantummicrogrid.dto.request.MicrogridRequestDTO;
+import com.quantummicrogrid.dto.response.MicrogridResponseDTO;
+import com.quantummicrogrid.service.MicrogridService;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-
-import com.quantummicrogrid.model.Microgrid;
-import com.quantummicrogrid.repository.MicrogridRepository;
 
 
 @RestController
 @RequestMapping("/api/microgrids")
+@RequiredArgsConstructor
 public class MicrogridController {
 
+    private final MicrogridService microgridService;
 
-    private final MicrogridRepository repository;
+    @PostMapping
+    public ResponseEntity<MicrogridResponseDTO> create(@Valid @RequestBody MicrogridRequestDTO request) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(microgridService.create(request));
+    }
 
-
-    public MicrogridController(MicrogridRepository repository){
-        this.repository = repository;
+    @GetMapping("/{id}")
+    public ResponseEntity<MicrogridResponseDTO> getById(@PathVariable Long id) {
+        return ResponseEntity.ok(microgridService.getById(id));
     }
 
     @GetMapping
-    public List<Microgrid> getAll(){
-        return repository.findAll();
+    public ResponseEntity<List<MicrogridResponseDTO>> getAll() {
+        return ResponseEntity.ok(microgridService.getAll());
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        microgridService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }

@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "quantum.service.url",
+      "type": "java.lang.String",
+      "description": "URL du microservice Python d'optimisation quantique (Qiskit/FastAPI)"
+    }
+  ]
+}
