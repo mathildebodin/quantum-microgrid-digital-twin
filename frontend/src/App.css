@@ -1,0 +1,103 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background: #0a0e14;
+  color: #e5e9f0;
+  margin: 0;
+}
+
+.dashboard-page, .microgrid-detail-page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+h1, h2, h3 {
+  font-weight: 500;
+}
+
+a {
+  color: #38bdf8;
+  text-decoration: none;
+}
+
+.microgrid-form, .compare-form, .simulation-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 360px;
+  background: #12181f;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+}
+
+.microgrid-form input, .compare-form input, .simulation-form input {
+  background: #1f2937;
+  border: 1px solid #2c3543;
+  color: #e5e9f0;
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 14px;
+}
+
+.microgrid-form button, .compare-form button, .simulation-form button {
+  background: #38bdf8;
+  color: #04243a;
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.microgrid-form button:disabled, .compare-form button:disabled, .simulation-form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.form-error {
+  color: #f87171;
+  font-size: 14px;
+}
+
+.microgrid-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.microgrid-card {
+  background: #12181f;
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+}
+
+.microgrid-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.delete-button {
+  background: transparent;
+  border: 1px solid #7f1d1d;
+  color: #f87171;
+  border-radius: 8px;
+  padding: 4px 10px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.cheapest-method {
+  background: #0f2e1e;
+  border: 1px solid #1d9e75;
+  color: #5dcaa5;
+  padding: 8px 12px;
+  border-radius: 8px;
+  display: inline-block;
+}

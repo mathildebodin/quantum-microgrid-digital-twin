@@ -17,6 +17,43 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d microgrid"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  quantum-service:
+    build: ./quantum-service
+    container_name: microgrid-quantum-service
+    ports:
+      - "8000:8000"
+
+  backend-java:
+    build: ./backend-java
+    container_name: microgrid-backend-java
+    ports:
+      - "8080:8080"
+    environment:
+      # Overrides application.yml — service names replace localhost inside the Docker network
+      SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/microgrid
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: admin
+      QUANTUM_SERVICE_URL: http://quantum-service:8000
+    depends_on:
+      database:
+        condition: service_healthy
+      quantum-service:
+        condition: service_started
+
+  frontend:
+    build: ./frontend
+    container_name: microgrid-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend-java
+
 
 volumes:
 
